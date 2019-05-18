@@ -26,8 +26,8 @@ spring:
       client:
         registration:
           google:
-            clientId: 156710754963-qlhjno9fnk15pifiq2pi9f7lcjjm.apps.googleusercontent.com
-            clientSecret: APbDd8oE8q5i91E_lLZP
+            clientId: 156710754963-qlho0l8o9fnk15pifiq2pi9f7lcjjm.apps.googleusercontent.com
+            clientSecret: APbDd8oE8q5iJl91E_lLZP
             redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
             scope:
               - email
@@ -77,6 +77,8 @@ eureka:
 
 zuul:
   routes:
-    api:
-      path: /api/**
+    event-service:
+      path: /scheduler/**
+    executor-service:
+      path: /executor/**
 
