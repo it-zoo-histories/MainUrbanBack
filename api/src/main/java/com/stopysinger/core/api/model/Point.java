@@ -15,6 +15,8 @@ public class Point {
         this.y = y;
     }
 
+    public Point() {}
+
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO)

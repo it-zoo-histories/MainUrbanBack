@@ -2,7 +2,9 @@ package com.stopysinger.core.api.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stopysinger.core.api.bean.BaseMapPoint;
 import com.stopysinger.core.api.bean.ViaPoint;
+import com.stopysinger.core.api.bean.WayPoint;
 import com.stopysinger.core.api.model.Point;
 import com.stopysinger.core.api.model.Route;
 import com.stopysinger.core.api.repository.RoutesRepository;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -26,12 +29,12 @@ public class ApiController {
     @RequestMapping(value = "/routes", method = RequestMethod.GET)
     public String getRoute(@RequestParam(value="id") String name) throws JsonProcessingException {
         List<Point> points = routesRepository.getPoints(name);
-        List<ViaPoint> dePoints = new ArrayList<>();
+        List<WayPoint> dePoints = new ArrayList<>();
         for(Point point : points) {
             List pointList = new ArrayList();
-            pointList.add(point.getX());
             pointList.add(point.getY());
-            ViaPoint viaPoint = new ViaPoint("viaPoint", pointList);
+            pointList.add(point.getX());
+            WayPoint viaPoint = new WayPoint(pointList);
             dePoints.add(viaPoint);
         }
         return objectMapper.writeValueAsString(dePoints);
