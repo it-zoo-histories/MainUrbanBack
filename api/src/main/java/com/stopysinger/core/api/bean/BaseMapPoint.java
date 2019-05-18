@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class ViaPoint extends BaseMapPoint {
-    private String type = "viaPoint";
+public class BaseMapPoint {
+    private List<Double> point;
 
-    public ViaPoint(List<Double> point) {
-        super(point);
+    public BaseMapPoint(List<Double> point) {
+        this.point = point;
     }
 }

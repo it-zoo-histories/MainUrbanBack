@@ -77,8 +77,6 @@ eureka:
 
 zuul:
   routes:
-    event-service:
-      path: /scheduler/**
-    executor-service:
-      path: /executor/**
+    api:
+      path: /api/**
 
