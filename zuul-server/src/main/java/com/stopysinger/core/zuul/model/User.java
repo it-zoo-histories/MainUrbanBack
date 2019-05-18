@@ -6,7 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "users", uniqueConstraints = {
+@Table(name = "keks", uniqueConstraints = {
         @UniqueConstraint(columnNames = "email")
 })
 public class User {
@@ -20,8 +20,6 @@ public class User {
     @Email
     @Column(nullable = false)
     private String email;
-
-    private String imageUrl;
 
     @Column(nullable = false)
     private Boolean emailVerified = false;
@@ -57,14 +55,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public Boolean getEmailVerified() {
