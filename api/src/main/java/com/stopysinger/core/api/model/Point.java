@@ -9,6 +9,12 @@ import javax.persistence.*;
 @Table(name = "point")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Point {
+
+    public Point(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO)

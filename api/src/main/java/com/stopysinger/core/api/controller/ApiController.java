@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stopysinger.core.api.bean.ViaPoint;
 import com.stopysinger.core.api.model.Point;
+import com.stopysinger.core.api.model.Route;
 import com.stopysinger.core.api.repository.RoutesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,13 +19,13 @@ import java.util.List;
 public class ApiController {
 
     @Autowired
-    RoutesRepository routesRepository;
+    private RoutesRepository routesRepository;
 
-    ObjectMapper objectMapper = new ObjectMapper();
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @RequestMapping(value = "/routes", method = RequestMethod.GET)
-    public String getRoute(@RequestParam(value="id") String id) throws JsonProcessingException {
-        List<Point> points = routesRepository.getPoints(id);
+    public String getRoute(@RequestParam(value="id") String name) throws JsonProcessingException {
+        List<Point> points = routesRepository.getPoints(name);
         List<ViaPoint> dePoints = new ArrayList<>();
         for(Point point : points) {
             List pointList = new ArrayList();
@@ -34,6 +35,22 @@ public class ApiController {
             dePoints.add(viaPoint);
         }
         return objectMapper.writeValueAsString(dePoints);
+    }
+
+    @RequestMapping(value = "/routes", method = RequestMethod.POST)
+    public void createRoute(@RequestParam(value="id") String name) {
+        Route route = new Route();
+        route.setName(name);
+        routesRepository.save(route);
+    }
+
+    @RequestMapping(value = "/point", method = RequestMethod.POST)
+    public void trackPoint(@RequestParam(value="id") String name,
+                           @RequestParam(value="x") String x,
+                           @RequestParam(value="y") String y) {
+        Route route = routesRepository.findByName(name);
+        route.getPoints().add(new Point(Double.parseDouble(x), Double.parseDouble(y)));
+        routesRepository.save(route);
     }
 
     @RequestMapping(value = "/all_routes", method = RequestMethod.GET)
