@@ -1,0 +1,21 @@
+server:
+  port: ${port:8080}
+spring:
+  application:
+    name: zuul-server
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ["*"]
+eureka:
+  client:
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
+zuul:
+  routes:
+    event-service:
+      path: /scheduler/**
+    executor-service:
+      path: /executor/**
