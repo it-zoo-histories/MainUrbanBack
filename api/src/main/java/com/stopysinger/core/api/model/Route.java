@@ -8,7 +8,7 @@ import java.util.List;
 public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
     @ManyToMany
     private List<Point> points;
     private String name;

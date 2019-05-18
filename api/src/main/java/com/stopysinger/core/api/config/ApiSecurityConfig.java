@@ -16,7 +16,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/api").permitAll()
+                .antMatchers("/", "/routes").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
