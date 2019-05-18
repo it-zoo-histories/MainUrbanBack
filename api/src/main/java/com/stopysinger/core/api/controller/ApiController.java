@@ -26,9 +26,9 @@ public class ApiController {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    @CrossOrigin(origins = "http://192.168.46.88:3000")
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/routes", method = RequestMethod.GET)
-    public ResponseEntity<List<WayPoint>> getRoute(@RequestParam(value="id") String name) throws JsonProcessingException {
+    public ResponseEntity<List<WayPoint>> getRoute(@RequestParam(value="id") String name) {
         List<Point> points = routesRepository.getPoints(name);
         List<WayPoint> dePoints = new ArrayList<>();
         for(Point point : points) {
@@ -41,7 +41,7 @@ public class ApiController {
         return new ResponseEntity<>(dePoints, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://192.168.46.88:3000")
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/routes", method = RequestMethod.POST)
     public void createRoute(@RequestParam(value="id") String name) {
         Route route = new Route();
