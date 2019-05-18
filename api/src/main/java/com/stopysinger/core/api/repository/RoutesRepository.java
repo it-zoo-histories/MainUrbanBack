@@ -12,4 +12,7 @@ import java.util.List;
 public interface RoutesRepository extends JpaRepository<Route, Long> {
     @Query("select rt.points from Route rt where rt.name=:name")
     List<Point> getPoints(String name);
+
+    @Query("select rt.name from Route rt")
+    List<String> getNames();
 }

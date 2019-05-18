@@ -4,19 +4,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stopysinger.core.api.bean.ViaPoint;
 import com.stopysinger.core.api.model.Point;
-import com.stopysinger.core.api.model.Route;
 import com.stopysinger.core.api.repository.RoutesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class ApiController {
@@ -41,8 +37,8 @@ public class ApiController {
     }
 
     @RequestMapping(value = "/all_routes", method = RequestMethod.GET)
-    public String createRoute() throws JsonProcessingException {
-        List<Route> routes = routesRepository.findAll();
+    public String getAllRoutes() throws JsonProcessingException {
+        List<String> routes = routesRepository.getNames();
         return objectMapper.writeValueAsString(routes);
     }
 }
